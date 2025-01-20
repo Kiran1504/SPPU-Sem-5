@@ -12,100 +12,71 @@ class DistributedSystem:
         self.graph[node2].append(node1)
     
     def dfs(self, start, visited, failed_nodes):
-        """
-        Perform DFS to find all nodes connected to the start node, excluding failed nodes.
-        This ensures that data can still be retrieved from backup nodes.
-        """
-        visited.add(start)
-        print(f"Visiting node {start} for data retrieval.")
         
+        visited.add(start)
+
         # Explore all connected nodes
         for neighbor in self.graph[start]:
             if neighbor not in visited and neighbor not in failed_nodes:
                 self.dfs(neighbor, visited, failed_nodes)
 
-    def find_backup_nodes(self, failed_node, data_source_node):
-        """
-        Find backup nodes that can store the same data when one node fails.
-        If a node fails, DFS is performed to find all available nodes for data retrieval.
-        """
-        print(f"\nStarting DFS to find backup nodes for data retrieval if node {failed_node} fails.")
-        
-        # Set of visited nodes to avoid cycles
+    def find_backup_nodes(self, failed_node:set, data_source_node):
         visited = set()
-        
-        # Set of failed nodes (cannot access these)
-        failed_nodes = {failed_node}
-        
-        # Start DFS from the data source node, looking for all backup nodes
-        self.dfs(data_source_node, visited, failed_nodes)
+
+        self.dfs(data_source_node, visited, failed_node)
 
         if len(visited) == 1:
             print("No backup nodes found. Data cannot be retrieved.")
         else:
-            print("\nData can be retrieved from the following backup nodes:")
+            print(f"\nData can be retrieved from the following backup nodes for the source node {data_source_node} even if node(s) {failed_node if len(failed_node) else "'No failure node'"} fails:")
             print(visited)
 
 
-# Initialize the distributed system with 6 nodes (servers)
-distributed_system = DistributedSystem(6)
+n = int(input("Enter number of server devices: "))
+distributed_system = DistributedSystem(n)
+failed_nodes = set()
 
-# Add connections between nodes (simulating communication between servers)
-distributed_system.add_connection(0, 1)
-distributed_system.add_connection(1, 2)
-distributed_system.add_connection(2, 3)
-distributed_system.add_connection(3, 4)
-distributed_system.add_connection(4, 5)
-distributed_system.add_connection(0, 5)
-
-# Simulate a failure of node 2
-failed_node = 2
-
-# Assume that node 0 holds the data and we need to find backups
-data_source_node = 0
-
-# Find backup nodes after the failure of node 2
-distributed_system.find_backup_nodes(failed_node, data_source_node)
-
-
-
-# pip install requests beautifulsoup4
-
-# import requests
-# from bs4 import BeautifulSoup
-# from collections import deque
-
-# # BFS Web Crawler
-# def bfs_crawl(start_url):
-#     visited = set()  # To keep track of visited URLs
-#     queue = deque([start_url])  # Queue for BFS
-    
-#     while queue:
-#         url = queue.popleft()  # Get the next URL from the queue
-        
-#         # If the URL is already visited, skip it
-#         if url in visited:
-#             continue
-        
-#         print(f"Visiting: {url}")
-#         visited.add(url)  # Mark this URL as visited
-        
-#         try:
-#             # Send a GET request to the URL and parse the HTML content
-#             response = requests.get(url)
-#             soup = BeautifulSoup(response.text, "html.parser")
-            
-#             # Find all anchor tags (links) on the page
-#             links = soup.find_all("a", href=True)
-            
-#             # Enqueue all unvisited links
-#             for link in links:
-#                 new_url = link['href']
-#                 if new_url.startswith("http") and new_url not in visited:
-#                     queue.append(new_url)
-#         except requests.RequestException as e:
-#             print(f"Failed to retrieve {url}: {e}")
-
-# # Starting point for the BFS crawler
-# start_url = "https://example.com"
-# bfs_crawl(start_url)
+while True:
+    try:
+        i = int(input("\nEnter choice:\n1. To Add connection.\n2. To find backup nodes.\n3. Mark a failure node.\n4. To restart a failed node.\n-1. To exit: "))
+        if i == -1:
+            print("Terminating.....")
+            break
+        if i == 1:
+            count = int(input("Enter no of pairs/connections to be added: "))
+            i = 0
+            while i < count:
+                a, b = map(int, input("Enter adjacent nodes: ").split())
+                if a < n and b < n:
+                    distributed_system.add_connection(a, b)
+                    i += 1
+                else:
+                    print("Wrong input of nodes!!!")
+                    continue
+            print("Connections added.")
+        elif i == 2:
+            src = int(input("Input the source server to find backup for: "))
+            if src < n:
+                distributed_system.find_backup_nodes(failed_nodes, src)
+            else:
+                print("Wrong input for src")
+        elif i == 3:
+            failed_node = int(input("Input a failed node for simulation test: "))
+            if failed_node < n:
+                failed_nodes.add(failed_node)
+                print("added failed node.")
+            else:
+                print("Wrong input")
+        elif i == 4:
+            node = int(input("Input a failed node for simulation test: "))
+            if node < n:
+                failed_nodes.remove(node)
+                print("removed a failed node.")
+            else:
+                print("Wrong input")
+        else:
+            print("Wrong input.")
+    except Exception as e:
+        print(f"Error Occurred {e}")
+        print("Terminating.....")
+        break
