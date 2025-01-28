@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WealthWise Mutual Funds</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Internal CSS */
+        .highlight {
+            background-color: #fef3c7;
+            padding: 1rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background-color: #f3f4f6;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with inline CSS for logo -->
+    <header class="header">
+        <nav class="nav">
+            <h1 style="margin: 0; font-size: 1.5rem;">WealthWise Funds</h1>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="funds.html">Our Funds</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Invest in Your Future</h1>
+        <p>Expert-managed mutual funds for your financial growth</p>
+    </section>
+
+    <main class="container">
+        <!-- Stats Section -->
+        <div class="stats">
+            <div class="stat-card">
+                <h3>15+</h3>
+                <p>Years of Experience</p>
+            </div>
+            <div class="stat-card">
+                <h3>₹10,000 Cr+</h3>
+                <p>Assets Under Management</p>
+            </div>
+            <div class="stat-card">
+                <h3>1M+</h3>
+                <p>Happy Investors</p>
+            </div>
+        </div>
+
+        <!-- Featured Funds -->
+        <section>
+            <h2>Featured Mutual Funds</h2>
+            <div class="highlight">
+                <p>🌟 Special offer: Zero entry load on all equity funds!</p>
+            </div>
+            <table class="funds-table">
+                <thead>
+                    <tr>
+                        <th>Fund Name</th>
+                        <th>Category</th>
+                        <th>1Y Returns</th>
+                        <th>3Y Returns</th>
+                        <th>Risk Level</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="funds.html#bluechip">WealthWise Bluechip Fund</a></td>
+                        <td>Large Cap</td>
+                        <td>15.8%</td>
+                        <td>12.5%</td>
+                        <td>Moderate</td>
+                    </tr>
+                    <tr>
+                        <td><a href="funds.html#midcap">WealthWise Midcap Opportunities</a></td>
+                        <td>Mid Cap</td>
+                        <td>22.4%</td>
+                        <td>18.2%</td>
+                        <td>High</td>
+                    </tr>
+                    <tr>
+                        <td><a href="funds.html#debt">WealthWise Debt Fund</a></td>
+                        <td>Debt</td>
+                        <td>7.2%</td>
+                        <td>6.8%</td>
+                        <td>Low</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Contact Form -->
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 WealthWise Mutual Funds. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
