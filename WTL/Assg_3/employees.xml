@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="employees.xsl"?>
+<employees>
+    <employee id="E001">
+        <name>John Doe</name>
+        <position>Software Engineer</position>
+        <department>Development</department>
+        <salary>75000</salary>
+        <hireDate>2020-03-15</hireDate>
+    </employee>
+    <employee id="E002">
+        <name>Jane Smith</name>
+        <position>Product Manager</position>
+        <department>Product</department>
+        <salary>90000</salary>
+        <hireDate>2019-05-10</hireDate>
+    </employee>
+    <employee id="E003">
+        <name>Mike Johnson</name>
+        <position>UX Designer</position>
+        <department>Design</department>
+        <salary>70000</salary>
+        <hireDate>2021-07-23</hireDate>
+    </employee>
+</employees>
